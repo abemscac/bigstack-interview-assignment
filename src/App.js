@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Theme } from '@carbon/react';
-import { BrowserRouter } from 'react-router-dom';
 import UIHeader from '@components/UIHeader';
 import './app.scss';
+import RouterView from '@components/RouterView';
 
 const App = () => {
   // TODO: replace this with your own data fetching code!
@@ -27,11 +27,10 @@ const App = () => {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Theme theme="g90">
-        <UIHeader />
-      </Theme>
-    </BrowserRouter>
+    <Theme className="app" theme="white">
+      <UIHeader />
+      <RouterView />
+    </Theme>
   );
 };
 

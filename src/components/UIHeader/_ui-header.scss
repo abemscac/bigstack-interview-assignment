@@ -11,11 +11,8 @@
   background-color: colors.$gray-20;
 }
 
-.cds--header {
-  background-color: #0E1C41;
-  nav, button {
-    background-color: #0E1C41;
-  }
+.cds--side-nav {
+  border-right: 1px solid var(--cds-border-subtle);
 }
 
 .side-nav-content {

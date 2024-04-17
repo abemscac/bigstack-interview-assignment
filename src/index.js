@@ -3,13 +3,13 @@ import './index.scss';
 import '@carbon/charts-react/styles.css';
 
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import { HashRouter as Router } from 'react-router-dom';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Router>
+    <BrowserRouter>
       <App />
-    </Router>
+    </BrowserRouter>
   </StrictMode>
 );
