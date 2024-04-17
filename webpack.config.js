@@ -77,9 +77,9 @@ const webpackConfig = {
   resolve: {
     extensions: ['.jsx', '.js', '.json', '.css', '.scss', '.sass'],
     alias: {
-      '@src': path.resolve(__dirname, 'src'),
       '@components': path.resolve(__dirname, 'src/components'),
-      '@content': path.resolve(__dirname, 'src/content')
+      '@images': path.resolve(__dirname, 'src/images'),
+      '@pages': path.resolve(__dirname, 'src/pages')
     }
   },
   output: {
@@ -198,7 +198,7 @@ const webpackConfig = {
           title: process.env.APP_NAME || 'Cube Interview Assignment',
           template: `${paths.assets}/templates/index.ejs`,
           scriptLoading: 'defer',
-          favicon: 'image/cube.png'
+          favicon: 'images/cube.png'
         },
         !isDev && {
           minify: {
@@ -220,7 +220,7 @@ const webpackConfig = {
     host: 'localhost',
     stats: 'minimal',
     hot: true,
-    open: true,
+    open: false,
     historyApiFallback: true,
     publicPath,
     contentBase: paths.publicPath,

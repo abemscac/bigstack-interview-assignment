@@ -12,7 +12,7 @@ import {
 } from '@carbon/react';
 import { Link } from 'react-router-dom';
 import { Home } from '@carbon/icons-react';
-import cube from '@src/image/cube.png';
+import cube from '@images/cube.png';
 
 const UIHeader = () => {
   return (

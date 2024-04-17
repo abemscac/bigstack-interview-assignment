@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Theme } from '@carbon/react';
 import { BrowserRouter } from 'react-router-dom';
 import UIHeader from '@components/UIHeader';
-import '@src/app.scss';
+import './app.scss';
 
 const App = () => {
   // TODO: replace this with your own data fetching code!
