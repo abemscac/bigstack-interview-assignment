@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import './index.scss';
 import '@carbon/charts-react/styles.css';
 
@@ -7,7 +7,9 @@ import App from './App';
 import { HashRouter as Router } from 'react-router-dom';
 
 createRoot(document.getElementById('root')).render(
-  <Router>
-    <App />
-  </Router>
+  <StrictMode>
+    <Router>
+      <App />
+    </Router>
+  </StrictMode>
 );
