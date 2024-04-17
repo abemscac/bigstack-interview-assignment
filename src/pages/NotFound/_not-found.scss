@@ -1,9 +1,9 @@
+@use '@css-utilities/flexbox.scss';
+
 .not-found-page {
+  @extend %flex-center;
   height: 100%;
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   .text {
     margin-top: 8px;
   }

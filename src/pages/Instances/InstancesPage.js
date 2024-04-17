@@ -1,10 +1,15 @@
 import React from 'react';
-import { Heading } from '@carbon/react';
+import { BareMetalServer } from '@carbon/icons-react';
+import PageHeader from '@components/PageHeader';
 
 export const InstancesPage = () => {
   return (
     <div className="instances-page">
-      <Heading>Instances</Heading>
+      <PageHeader
+        icon={defaultProps => <BareMetalServer size={defaultProps.size} />}
+        title="Instances"
+        subtitle="Overview of your virtual machines"
+      />
     </div>
   );
 };

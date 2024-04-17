@@ -1,8 +1,10 @@
 /* import all components and content scss files */
 
 // component scss files - these are the components css that are rendered in each components
-@use './components/UIHeader/ui-header';
+@use './components/PageHeader/page-header';
 @use './components/RouterView/router-view';
+@use './components/UIHeader/ui-header';
+
 @use './pages/Instances/instances-page';
 @use './pages/NotFound/not-found';
 

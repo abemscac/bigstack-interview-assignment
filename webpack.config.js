@@ -78,6 +78,7 @@ const webpackConfig = {
     extensions: ['.jsx', '.js', '.json', '.css', '.scss', '.sass'],
     alias: {
       '@components': path.resolve(__dirname, 'src/components'),
+      '@css-utilities': path.resolve(__dirname, 'src/css-utilities'),
       '@images': path.resolve(__dirname, 'src/images'),
       '@pages': path.resolve(__dirname, 'src/pages')
     }

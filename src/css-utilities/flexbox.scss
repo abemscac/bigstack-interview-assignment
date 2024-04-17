@@ -1,0 +1,8 @@
+// Rule names start with % because they're only intended to be extended.
+// See https://sass-lang.com/documentation/at-rules/extend/#placeholder-selectors
+
+%flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
