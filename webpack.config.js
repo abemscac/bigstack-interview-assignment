@@ -77,10 +77,12 @@ const webpackConfig = {
   resolve: {
     extensions: ['.jsx', '.js', '.json', '.css', '.scss', '.sass'],
     alias: {
+      '@apis': path.resolve(__dirname, 'src/apis'),
       '@components': path.resolve(__dirname, 'src/components'),
       '@css-utilities': path.resolve(__dirname, 'src/css-utilities'),
       '@images': path.resolve(__dirname, 'src/images'),
-      '@pages': path.resolve(__dirname, 'src/pages')
+      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@utilities': path.resolve(__dirname, 'src/utilities')
     }
   },
   output: {

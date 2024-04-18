@@ -1,0 +1,43 @@
+@use '@css-utilities/flexbox.scss';
+
+.user-avatar {
+  $size-sm: 32px;
+  $size-md: 40px;
+
+  @extend %flex-center;
+  border-radius: 50%;
+  text-transform: uppercase;
+  color: #ffffff;
+
+  // Colors
+  &.color-0 {
+    background-color: #ffff00;
+  }
+
+  &.color-1 {
+    background-color: #0000ff;
+  }
+
+  &.color-2 {
+    background-color: #15cd72;
+  }
+
+  &.color-3 {
+    background-color: #8143f3;
+  }
+
+  &.color-4 {
+    background-color: #ff00ff;
+  }
+
+  // Sizes
+  &.sm {
+    width: $size-sm;
+    height: $size-sm;
+  }
+
+  &.md {
+    width: $size-md;
+    height: $size-md;
+  }
+}

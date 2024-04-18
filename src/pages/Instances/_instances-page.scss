@@ -1,4 +1,112 @@
+@use '@css-utilities/flexbox.scss';
+
 .instances-page {
-  height: 100%;
-  padding: 40px 72px;
+  $background-color: #ffffff;
+  padding: 24px 32px;
+  .instances-table-wrap {
+    .error {
+      padding: 24px;
+      text-align: center;
+      font-size: 2rem;
+      color: #ff0000;
+    }
+
+    .cds--data-table {
+      th {
+        background-color: $background-color;
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--cds-border-subtle);
+        white-space: nowrap;
+      }
+      tbody {
+        border-left: 1px solid var(--cds-border-subtle);
+        border-right: 1px solid var(--cds-border-subtle);
+        background-color: $background-color;
+        td {
+          padding-top: 0.5rem;
+          padding-bottom: 0.5rem;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .name-wrap {
+      display: flex;
+      flex-direction: column;
+      .instance-name {
+        font-weight: bold;
+      }
+      .instance-type,
+      .instance-image {
+        color: #ababab;
+        margin-top: 4px;
+        font-size: 12px;
+      }
+    }
+
+    .keypair-tag {
+      max-width: 80px;
+      display: block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      outline: none;
+      border: none;
+    }
+
+    .volumes-text {
+      display: block;
+      text-align: right;
+      padding-right: 16px;
+    }
+
+    .tags-cell {
+      .tags-wrap {
+        .instance-tag {
+          cursor: pointer;
+        }
+      }
+      .add-tag-button {
+        cursor: pointer;
+        color: #0e61fe;
+        border: none;
+        outline: none;
+        background-color: transparent;
+      }
+    }
+
+    .user-avatar {
+      margin-left: auto;
+    }
+
+    .expires-wrap {
+      display: flex;
+      align-items: center;
+      column-gap: 8px;
+      .expires-text {
+        color: #525252;
+        &.expired {
+          color: #ff0000;
+        }
+      }
+      .edit-icon {
+        cursor: pointer;
+        fill: #808080;
+        &:hover {
+          fill: #094acf;
+        }
+      }
+    }
+
+    .status-tag {
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    .action-cell {
+      // Hide the "Options" tooltip when OverflowMenu toggle is hovered.
+      span[role='tooltip'] {
+        display: none;
+      }
+    }
+  }
 }

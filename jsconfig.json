@@ -3,10 +3,12 @@
     "target": "ES2020",
     "moduleResolution": "Bundler",
     "paths": {
-      "@components/*": ["./src/components/*"],
+      "@apis/*": ["./src/apis/*"],
+      "@components/*": ["./src/components/*/index.js"],
       "@css-utilities/*": ["./src/css-utilities/*"],
       "@images/*": ["./src/images/*"],
-      "@pages/*": ["./src/pages/*"]
+      "@pages/*": ["./src/pages/*/index.js"],
+      "@utilities/*": ["./src/utilities/*"]
     }
   }
 }

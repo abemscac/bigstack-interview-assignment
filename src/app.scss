@@ -4,9 +4,10 @@
 @use './components/PageHeader/page-header';
 @use './components/RouterView/router-view';
 @use './components/UIHeader/ui-header';
+@use './components/UserAvatar/user-avatar';
 
 @use './pages/Instances/instances-page';
-@use './pages/NotFound/not-found';
+@use './pages/NotFound/not-found-page';
 
 .app {
   height: 100%;
