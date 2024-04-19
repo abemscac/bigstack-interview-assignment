@@ -1,0 +1,32 @@
+@use '@css-utilities/flexbox.scss';
+
+.instance-tags-modal {
+  .cds--modal-container {
+    background-color: #ffffff;
+    .cds--modal-header__heading {
+      font-weight: bold;
+    }
+  }
+  .hint {
+    color: #878787;
+  }
+  .content-wrap {
+    padding: 8px;
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    border: 1px solid #e0e0e0;
+    .tag-input-wrap input {
+      border: 1px solid #e0e0e0;
+    }
+  }
+  .footer-wrap {
+    margin-top: 16px;
+    .save-button {
+      @extend %flex-center;
+      padding: 0;
+      width: 64px;
+    }
+  }
+}

@@ -1,5 +1,13 @@
 @use '@css-utilities/flexbox.scss';
 
+%truncated-tag {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  outline: none;
+  border: none;
+}
+
 .instances-page {
   $background-color: #ffffff;
   padding: 24px 32px;
@@ -45,12 +53,8 @@
     }
 
     .keypair-tag {
+      @extend %truncated-tag;
       max-width: 80px;
-      display: block;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      outline: none;
-      border: none;
     }
 
     .volumes-text {
@@ -61,8 +65,15 @@
 
     .tags-cell {
       .tags-wrap {
+        width: 100px;
+        display: flex;
+        flex-wrap: wrap;
         .instance-tag {
-          cursor: pointer;
+          @extend %truncated-tag;
+          max-width: 64px;
+          &__more {
+            width: 40px;
+          }
         }
       }
       .add-tag-button {
@@ -103,7 +114,8 @@
     }
 
     .action-cell {
-      // Hide the "Options" tooltip when OverflowMenu toggle is hovered.
+      // Hide the "Options" tooltip when OverflowMenu toggle is hovered
+      // to prevent unwanted scrollbar from showing up.
       span[role='tooltip'] {
         display: none;
       }

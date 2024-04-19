@@ -10,6 +10,10 @@ import {
 } from '@carbon/react';
 import { InstanceApi } from '@apis/instance-api';
 import { InstanceRow } from './InstanceRow';
+import {
+  InstanceTagsModal,
+  useInstanceTagsModal
+} from '@components/InstanceTagsModal';
 
 const headers = [
   {
@@ -65,7 +69,7 @@ const headers = [
 const { useListInstances } = InstanceApi;
 
 export const InstancesTableWrap = () => {
-  const { data: instances = [], isLoading, error } = useListInstances();
+  const { data: instances = [], isLoading, error, mutate } = useListInstances();
 
   const renderDataTable = () => (
     <DataTable rows={instances} headers={headers}>
@@ -88,6 +92,7 @@ export const InstancesTableWrap = () => {
                   key={instance.id}
                   rowProps={getRowProps({ row })}
                   instance={instance}
+                  onEditTag={() => openModal(instance)}
                 />
               );
             })}
@@ -114,10 +119,33 @@ export const InstancesTableWrap = () => {
     }
   };
 
+  const { modalOpen, editedInstance, openModal, closeModal } =
+    useInstanceTagsModal();
+
+  /**
+   * @param {string[]} newTags
+   */
+  const updateTags = newTags => {
+    const newInstances = [...instances];
+    const instance = newInstances.find(
+      instance => instance.id === editedInstance.id
+    );
+    if (instance) {
+      instance.tags = newTags;
+      mutate(newInstances);
+    }
+  };
+
   return (
     <div className="instances-table-wrap">
       <div className="search-bar">Search bar</div>
       {renderContent()}
+      <InstanceTagsModal
+        open={modalOpen}
+        instance={editedInstance}
+        onSave={updateTags}
+        onClose={closeModal}
+      />
     </div>
   );
 };

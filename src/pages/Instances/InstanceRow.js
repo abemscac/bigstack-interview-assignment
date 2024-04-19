@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import {
   OverflowMenu,
@@ -21,13 +21,21 @@ const statusTagType = {
   stopped: 'cool-gray'
 };
 
+const MAX_VISIBLE_TAG_COUNT = 5;
+
 /**
  * @param {object} props
  * @param {object} props.instance
  * @param {object} props.rowProps
+ * @param {() => void} props.onEditTag
  */
 export const InstanceRow = props => {
-  const { instance, rowProps } = props;
+  const { instance, rowProps, onEditTag } = props;
+
+  const keyName = useMemo(
+    () => instance.key_name.replace('bigstack-', ''),
+    [instance.key_name]
+  );
 
   const renderNameCell = () => {
     return (
@@ -42,18 +50,48 @@ export const InstanceRow = props => {
   const renderTags = () => {
     const { tags } = instance;
     if (tags.length) {
+      const moreTagsCount = tags.length - MAX_VISIBLE_TAG_COUNT;
       return (
         <span className="tags-wrap">
-          {instance.tags.map(tag => (
-            <Tag key={tag} className="instance-tag" type="cool-gray">
-              {tag}
-            </Tag>
+          {tags.slice(0, MAX_VISIBLE_TAG_COUNT).map(tag => (
+            <Tooltip key={tag} className="tag-tooltip" label={tag}>
+              <Tag
+                className="instance-tag"
+                type="cool-gray"
+                size="sm"
+                onClick={onEditTag}
+              >
+                {tag}
+              </Tag>
+            </Tooltip>
           ))}
+          {moreTagsCount > 0 && renderMoreTags(moreTagsCount)}
         </span>
       );
     } else {
-      return <button className="add-tag-button">Add...</button>;
+      return (
+        <button className="add-tag-button" onClick={onEditTag}>
+          Add...
+        </button>
+      );
     }
+  };
+
+  const renderMoreTags = count => {
+    const tooltip = `${count} more tag(s)`;
+    const text = count > 99 ? '99+' : `${count}+`;
+    return (
+      <Tooltip className="more-tag-tooltip" label={tooltip}>
+        <Tag
+          className="instance-tag instance-tag__more"
+          type="cool-gray"
+          size="sm"
+          onClick={onEditTag}
+        >
+          {text}
+        </Tag>
+      </Tooltip>
+    );
   };
 
   const renderExpires = () => {
@@ -84,10 +122,10 @@ export const InstanceRow = props => {
       </TableCell>
       <TableCell className="name-cell">{renderNameCell()}</TableCell>
       <TableCell className="keypair-cell">
-        {instance.key_name && (
-          <Tooltip className="keypair-tooltip" label={instance.key_name}>
+        {keyName && (
+          <Tooltip className="keypair-tooltip" label={keyName}>
             <Tag className="keypair-tag" type="cool-gray" size="sm">
-              {instance.key_name}
+              {keyName}
             </Tag>
           </Tooltip>
         )}
