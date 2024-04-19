@@ -1,22 +1,22 @@
 import React, { useState, useMemo } from 'react';
 import { TextInput } from '@carbon/react';
-
-const TAG_PATTERN = /^[a-zA-Z0-9_-]*$/;
+import { isValidTag } from '@utilities/instance-util';
 
 /**
  * @param {object} props
  * @param {Set<string>} props.tagSet
+ * @param {(e: React.FocusEvent<HTMLInputElement>) => void} props.onBlur
  * @param {(value: string) => void} props.onSubmit
  */
 export const TagInput = props => {
-  const { tagSet, onSubmit: onSubmitProp } = props;
+  const { tagSet, onBlur, onSubmit: onSubmitProp } = props;
 
   const [value, setValue] = useState('');
 
   const errorMessage = useMemo(() => {
     if (tagSet.has(value)) {
       return 'Tag must be unique.';
-    } else if (!TAG_PATTERN.test(value)) {
+    } else if (!isValidTag(value)) {
       return 'Tag must match the requested format.';
     } else {
       return undefined;
@@ -48,6 +48,7 @@ export const TagInput = props => {
         invalidText={errorMessage}
         size="sm"
         value={value}
+        onBlur={onBlur}
         onChange={onChange}
       />
     </form>

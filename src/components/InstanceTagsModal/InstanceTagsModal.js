@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Button, DismissibleTag, Modal } from '@carbon/react';
 import { ModalPortal } from '@components/ModalPortal';
-import { storeTags } from '@utilities/instance-util';
+import { isValidTag, storeTags } from '@utilities/instance-util';
 import { TagInput } from './TagInput';
 
 /**
@@ -15,12 +15,16 @@ export const InstanceTagsModal = props => {
   const { open, instance, onSave: onSaveProp, onClose: onCloseProp } = props;
 
   const [tags, setTags] = useState([]);
+  const inputValueAfterBlur = useRef('');
 
   const tagSet = useMemo(() => new Set(tags), [tags]);
 
   useEffect(() => {
     if (open && instance?.tags) {
       setTags([...instance.tags]);
+    } else {
+      // Reset `inputValueAfterBlur` when modal is closed.
+      inputValueAfterBlur.current = '';
     }
   }, [open, instance?.tags]);
 
@@ -36,19 +40,37 @@ export const InstanceTagsModal = props => {
     });
   };
 
+  /**
+   * @param {React.FocusEvent<HTMLInputElement>} e
+   */
+  const onTagInputBlur = e => {
+    inputValueAfterBlur.current = e.target.value;
+  };
+
   const onSave = () => {
-    storeTags(instance.id, tags);
-    onSaveProp(tags);
+    const newTags = [...tags];
+
+    // Add unsaved value to the tag list, if possible.
+    if (
+      inputValueAfterBlur.current &&
+      !tagSet.has(inputValueAfterBlur.current) &&
+      isValidTag(inputValueAfterBlur.current)
+    ) {
+      newTags.push(inputValueAfterBlur.current);
+    }
+
+    storeTags(instance.id, newTags);
+    onSaveProp(newTags);
     onClose(false);
   };
 
   /**
-   * @param {boolean} checkChange Whether to check if tags have changed before close.
+   * @param {boolean} checkChanges Whether to check if tags have changed before close.
    */
-  const onClose = checkChange => {
+  const onClose = checkChanges => {
     let changed = false;
 
-    if (checkChange) {
+    if (checkChanges) {
       changed =
         instance.tags.length !== tags.length ||
         !tags.every((tag, index) => tag === instance.tags[index]);
@@ -87,7 +109,13 @@ export const InstanceTagsModal = props => {
               {tag}
             </DismissibleTag>
           ))}
-          <TagInput key={open} tagSet={tagSet} onSubmit={addTag} />
+          <TagInput
+            // Use key to "reset" the value of input when modal is toggled.
+            key={open}
+            tagSet={tagSet}
+            onBlur={onTagInputBlur}
+            onSubmit={addTag}
+          />
         </div>
         <div className="footer-wrap">
           <Button className="save-button" onClick={onSave}>

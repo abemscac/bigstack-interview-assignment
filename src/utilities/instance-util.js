@@ -47,3 +47,14 @@ export const storeTags = (instanceId, tags) => {
     localStorage.setItem(key, JSON.stringify(tags));
   }
 };
+
+// Tags can only contain letters, numbers, dashes and underscores.
+const TAG_PATTERN = /^[a-zA-Z0-9_-]*$/;
+
+/**
+ * @param {string} tag
+ * @returns {boolean}
+ */
+export const isValidTag = tag => {
+  return TAG_PATTERN.test(tag);
+};
