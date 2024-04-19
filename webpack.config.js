@@ -82,6 +82,7 @@ const webpackConfig = {
       '@css-utilities': path.resolve(__dirname, 'src/css-utilities'),
       '@images': path.resolve(__dirname, 'src/images'),
       '@pages': path.resolve(__dirname, 'src/pages'),
+      '@server-data': path.resolve(__dirname, 'server/data'),
       '@utilities': path.resolve(__dirname, 'src/utilities')
     }
   },

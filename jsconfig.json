@@ -8,6 +8,7 @@
       "@css-utilities/*": ["./src/css-utilities/*"],
       "@images/*": ["./src/images/*"],
       "@pages/*": ["./src/pages/*/index.js"],
+      "@server-data/*": ["./server/data/*"],
       "@utilities/*": ["./src/utilities/*"]
     }
   }
