@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import InstancesPage from '@pages/Instances';
-import NotFoundPage from '@pages/NotFound';
+import { InstancesPage } from '@pages/Instances';
+import { NotFoundPage } from '@pages/NotFound';
 
 export const RouterView = () => {
   return (

@@ -1,2 +1,1 @@
-import UIHeader from './UIHeader';
-export default UIHeader;
+export * from './UIHeader';

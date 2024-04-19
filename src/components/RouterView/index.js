@@ -1,1 +1,1 @@
-export { RouterView as default } from './RouterView';
+export * from './RouterView';

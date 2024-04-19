@@ -1,10 +1,10 @@
 import React from 'react';
 import { Theme } from '@carbon/react';
-import UIHeader from '@components/UIHeader';
+import { UIHeader } from '@components/UIHeader';
+import { RouterView } from '@components/RouterView';
 import './app.scss';
-import RouterView from '@components/RouterView';
 
-const App = () => {
+export const App = () => {
   return (
     <Theme className="app" theme="white">
       <UIHeader />
@@ -12,5 +12,3 @@ const App = () => {
     </Theme>
   );
 };
-
-export default App;

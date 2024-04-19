@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Button, DismissibleTag, Modal } from '@carbon/react';
+import { ModalPortal } from '@components/ModalPortal';
 import { storeTags } from '@utilities/instance-util';
 import { TagInput } from './TagInput';
-import { ModalPortal } from '../ModalPortal/ModalPortal';
 
 /**
  * @param {object} props

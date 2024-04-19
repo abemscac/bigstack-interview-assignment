@@ -9,7 +9,7 @@ import {
   Tooltip
 } from '@carbon/react';
 import { BareMetalServer, Edit } from '@carbon/icons-react';
-import UserAvatar from '@components/UserAvatar';
+import { UserAvatar } from '@components/UserAvatar';
 import { computeInstanceType } from '@utilities/instance-util';
 import { computeTimeAgo } from '@utilities/date-util';
 

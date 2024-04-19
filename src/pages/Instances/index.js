@@ -1,1 +1,1 @@
-export { InstancesPage as default } from './InstancesPage';
+export * from './InstancesPage';

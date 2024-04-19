@@ -10,11 +10,11 @@ import {
   SideNavLink,
   SideNavDivider
 } from '@carbon/react';
-import { Link } from 'react-router-dom';
 import { Home } from '@carbon/icons-react';
+import { Link } from 'react-router-dom';
 import cube from '@images/cube.png';
 
-const UIHeader = () => {
+export const UIHeader = () => {
   return (
     <HeaderContainer
       render={({ isSideNavExpanded, onClickSideNavExpand }) => (
@@ -63,5 +63,3 @@ const UIHeader = () => {
     />
   );
 };
-
-export default UIHeader;

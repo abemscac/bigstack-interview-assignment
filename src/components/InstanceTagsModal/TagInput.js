@@ -1,5 +1,5 @@
-import { TextInput } from '@carbon/react';
 import React, { useState, useMemo } from 'react';
+import { TextInput } from '@carbon/react';
 
 const TAG_PATTERN = /^[a-zA-Z0-9_-]*$/;
 

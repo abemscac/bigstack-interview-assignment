@@ -9,11 +9,11 @@ import {
   DataTableSkeleton
 } from '@carbon/react';
 import { InstanceApi } from '@apis/instance-api';
-import { InstanceRow } from './InstanceRow';
 import {
   InstanceTagsModal,
   useInstanceTagsModal
 } from '@components/InstanceTagsModal';
+import { InstanceRow } from './InstanceRow';
 
 const headers = [
   {
