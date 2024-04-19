@@ -2,9 +2,16 @@
 
 .instance-tags-modal {
   .cds--modal-container {
-    background-color: #ffffff;
-    .cds--modal-header__heading {
-      font-weight: bold;
+    background-color: #fff;
+    .cds--modal-header {
+      margin-bottom: 4px;
+      &__heading {
+        font-weight: bold;
+      }
+    }
+    .cds--modal-content {
+      padding-top: 0;
+      padding-bottom: 32px;
     }
   }
   .hint {
@@ -13,6 +20,9 @@
   .content-wrap {
     padding: 8px;
     margin-top: 32px;
+    min-height: 100px;
+    max-height: 200px;
+    overflow: auto;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
@@ -22,7 +32,7 @@
     }
   }
   .footer-wrap {
-    margin-top: 16px;
+    margin-top: 12px;
     .save-button {
       @extend %flex-center;
       padding: 0;
