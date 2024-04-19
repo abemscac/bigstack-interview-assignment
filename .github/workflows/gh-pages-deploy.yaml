@@ -1,7 +1,7 @@
 name: GhPages Deploy
 on:
   push:
-    branches: [main]
+    branches: [gh-pages-source]
 permissions:
   contents: write
 jobs:

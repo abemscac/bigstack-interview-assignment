@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { Button, DismissibleTag, Modal } from '@carbon/react';
+import { Button, Modal, Tag } from '@carbon/react';
 import { ModalPortal } from '@components/ModalPortal';
 import { isValidTag, storeTags } from '@utilities/instance-util';
 import { TagInput } from './TagInput';
@@ -101,13 +101,18 @@ export const InstanceTagsModal = props => {
         </div>
         <div className="content-wrap">
           {tags.map((tag, index) => (
-            <DismissibleTag
+            // Even though Tag with filter is deprecated, using DismissibleTag will
+            // lead to Minified React error #130 in production build, making Tag with
+            // filter our only option now.
+            // See https://react.dev/errors/130?invariant=130&args%5B%5D=undefined&args%5B%5D=
+            <Tag
               key={tag}
               type="cool-gray"
+              filter={true}
               onClose={() => removeTag(index)}
             >
               {tag}
-            </DismissibleTag>
+            </Tag>
           ))}
           <TagInput
             // Use key to "reset" the value of input when modal is toggled.
