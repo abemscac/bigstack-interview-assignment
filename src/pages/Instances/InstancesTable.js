@@ -6,13 +6,9 @@ import {
   TableRow,
   TableHeader,
   TableBody,
-  DataTableSkeleton
+  DataTableSkeleton,
+  TableCell
 } from '@carbon/react';
-import { InstanceApi } from '@apis/instance-api';
-import {
-  InstanceTagsModal,
-  useInstanceTagsModal
-} from '@components/InstanceTagsModal';
 import { InstanceRow } from './InstanceRow';
 
 const headers = [
@@ -66,10 +62,15 @@ const headers = [
   }
 ];
 
-const { useListInstances } = InstanceApi;
-
-export const InstancesTableWrap = () => {
-  const { data: instances = [], isLoading, error, mutate } = useListInstances();
+/**
+ * @param {object} props
+ * @param {object[]} props.instances
+ * @param {boolean} props.isLoading
+ * @param {any} props.error
+ * @param {(instance: object) => void} props.onEditTag
+ */
+export const InstancesTable = props => {
+  const { instances, isLoading, error, onEditTag } = props;
 
   const renderDataTable = () => (
     <DataTable rows={instances} headers={headers}>
@@ -85,6 +86,7 @@ export const InstancesTableWrap = () => {
             </TableRow>
           </TableHead>
           <TableBody>
+            {/* Data */}
             {rows.map((row, index) => {
               const instance = instances[index];
               return (
@@ -92,60 +94,36 @@ export const InstancesTableWrap = () => {
                   key={instance.id}
                   rowProps={getRowProps({ row })}
                   instance={instance}
-                  onEditTag={() => openModal(instance)}
+                  onEditTag={() => onEditTag(instance)}
                 />
               );
             })}
+            {/* No Results */}
+            {!rows.length && (
+              <TableRow>
+                <TableCell className="no-results-cell" colSpan={headers.length}>
+                  No Results
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       )}
     </DataTable>
   );
 
-  const renderContent = () => {
-    if (error) {
-      return <div className="error">{error.message}</div>;
-    } else if (isLoading) {
-      return (
-        <DataTableSkeleton
-          headers={headers}
-          columnCount={headers.length}
-          showHeader={false}
-          showToolbar={false}
-        />
-      );
-    } else {
-      return renderDataTable();
-    }
-  };
-
-  const { modalOpen, editedInstance, openModal, closeModal } =
-    useInstanceTagsModal();
-
-  /**
-   * @param {string[]} newTags
-   */
-  const updateTags = newTags => {
-    const newInstances = [...instances];
-    const instance = newInstances.find(
-      instance => instance.id === editedInstance.id
-    );
-    if (instance) {
-      instance.tags = newTags;
-      mutate(newInstances);
-    }
-  };
-
-  return (
-    <div className="instances-table-wrap">
-      <div className="search-bar">Search bar</div>
-      {renderContent()}
-      <InstanceTagsModal
-        open={modalOpen}
-        instance={editedInstance}
-        onSave={updateTags}
-        onClose={closeModal}
+  if (error) {
+    return <div className="error">{error.message}</div>;
+  } else if (isLoading) {
+    return (
+      <DataTableSkeleton
+        headers={headers}
+        columnCount={headers.length}
+        showHeader={false}
+        showToolbar={false}
       />
-    </div>
-  );
+    );
+  } else {
+    return renderDataTable();
+  }
 };

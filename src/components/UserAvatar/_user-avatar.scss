@@ -1,8 +1,8 @@
 @use '@css-utilities/flexbox.scss';
 
 .user-avatar {
-  $size-sm: 32px;
-  $size-md: 40px;
+  $size-sm: 24px;
+  $size-md: 32px;
 
   @extend %flex-center;
   border-radius: 50%;
@@ -34,10 +34,12 @@
   &.sm {
     width: $size-sm;
     height: $size-sm;
+    font-size: calc($size-sm / 2);
   }
 
   &.md {
     width: $size-md;
     height: $size-md;
+    font-size: calc($size-md / 2);
   }
 }

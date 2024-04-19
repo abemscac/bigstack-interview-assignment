@@ -1,7 +1,7 @@
 import React from 'react';
 import { BareMetalServer } from '@carbon/icons-react';
 import { PageHeader } from '@components/PageHeader';
-import { InstancesTableWrap } from './InstancesTableWrap';
+import { InstancesPageContent } from './InstancesPageContent';
 
 export const InstancesPage = () => {
   return (
@@ -11,7 +11,7 @@ export const InstancesPage = () => {
         title="Instances"
         subtitle="Overview of your virtual machines"
       />
-      <InstancesTableWrap />
+      <InstancesPageContent />
     </div>
   );
 };

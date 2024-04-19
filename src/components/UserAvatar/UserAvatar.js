@@ -9,7 +9,7 @@ const COLOR_COUNT = 5;
  * @param {'sm' | 'md'} [props.size] Default: `sm`
  */
 export const UserAvatar = props => {
-  const { user, size = 'sm' } = props;
+  const { user, size = 'md' } = props;
 
   const firstChar = user[0] || '';
   const colorIndex = firstChar.charCodeAt(0) % COLOR_COUNT;

@@ -8,7 +8,11 @@ import {
   Tag,
   Tooltip
 } from '@carbon/react';
-import { BareMetalServer, Edit } from '@carbon/icons-react';
+import {
+  BareMetalServer,
+  Edit,
+  OverflowMenuHorizontal
+} from '@carbon/icons-react';
 import { UserAvatar } from '@components/UserAvatar';
 import { computeInstanceType } from '@utilities/instance-util';
 import { computeTimeAgo } from '@utilities/date-util';
@@ -159,6 +163,7 @@ export const InstanceRow = props => {
           className="overflow-menu-toggle"
           aria-label="overflow-menu"
           flipped={true}
+          renderIcon={OverflowMenuHorizontal}
         >
           <OverflowMenuItem itemText="Enable floating IP" />
           <OverflowMenuItem itemText="Reboot" />

@@ -14,4 +14,28 @@
 
    - The position of the overflow menu is controlled by the library, making it necessary to explore options beyond pure CSS to completely replicate the design from the screenshot.
 
-3. Documentation describes the `className` property of [TextInput](https://react.carbondesignsystem.com/?path=/docs/components-textinput--overview) as "Specify an optional className to be applied to the `<input>` node", but the class is actually applied to the wrapper of the `<input>` (`.cds--text-input-wrapper`).
+3. Documentation describes the `className` property of [TextInput](https://react.carbondesignsystem.com/?path=/docs/components-textinput--overview) as "Specify an optional className to be applied to the `<input>` node", but the class is actually applied to the wrapper of the `<input>` (`.cds--text-input-wrapper`). The same problem also applies to [Search](https://react.carbondesignsystem.com/?path=/docs/components-search--overview) (better check all components with an input).
+
+4. Regarding table filtering:
+
+   - The requirement specifies "The filter options in these dropdowns should be dynamically generated from table data." This approach might not be ideal for status options. In real-world scenarios, all possible statuses are typically predefined and included in the dropdown for selection. Generating all status options from the table data would limit us to searching only within existing entries, which becomes problematic for functionalities like pagination.
+
+   - Including both an input field and checkboxes for status filtering seems redundant. A menu with only checkboxes would be a more reasonable approach.
+
+5. Currently [MenuButton](https://react.carbondesignsystem.com/?path=/docs/components-menubutton--overview) is used as the filter menu for status and owner. However, the following error will be thrown whenever a key is pressed:
+
+```
+Menu.js:156 Uncaught TypeError: Cannot read properties of undefined (reading 'ref')
+    at focusItem (Menu.js:156:1)
+    at handleKeyDown (Menu.js:129:1)
+    at HTMLUnknownElement.callCallback (react-dom.development.js:4164:1)
+    at Object.invokeGuardedCallbackDev (react-dom.development.js:4213:1)
+    at invokeGuardedCallback (react-dom.development.js:4277:1)
+    at invokeGuardedCallbackAndCatchFirstError (react-dom.development.js:4291:1)
+    at executeDispatch (react-dom.development.js:9041:1)
+    at processDispatchQueueItemsInOrder (react-dom.development.js:9073:1)
+    at processDispatchQueue (react-dom.development.js:9086:1)
+    at dispatchEventsForPlugins (react-dom.development.js:9097:1)
+```
+
+This error occurs because `MenuButton` expects its children to be `MenuItem`. When a key is pressed, it attempts to focus on the first non-disabled `MenuItem`. Since our filter menu doesn't use `MenuItem` as its children, this behavior leads to the error shown above. Unfortunately, there's no option on `MenuButton` that can disable this behavior. To address this, we should likely implement a custom component that caters to our specific needs.
